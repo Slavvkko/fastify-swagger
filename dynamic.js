@@ -13,7 +13,10 @@ module.exports = function (fastify, opts, next) {
   let ref
 
   fastify.addHook('onRoute', (routeOptions) => {
-    routes.push(routeOptions)
+    // routes.push(routeOptions)
+    if (routeOptions.prefix.indexOf(fastify.prefix) === 0) {
+      routes.push(routeOptions)
+    }
   })
 
   fastify.addHook('onRegister', async (instance) => {
